@@ -20,24 +20,21 @@ async function fetchAiData(message: string) {
 }
 
 function App() {
-  const [message, setMessage] = useState('');
   const [aiMessage, setAiMessage] = useState('');
+  const [userQuery, setUserQuery] = useState('');
 
-  useEffect(() => {
-    fetchData('/api/hello')
-        .then((data) => {
-          setMessage(data.message)
-        });
-    fetchAiData('Can you help me make a Dungeons and Dragons character?').then((data => {
-      console.log('data', data);
-      setAiMessage(data?.response?.content)
-    }))
-  }, []);
+    const fetchDataFromMessage = () => {
+        fetchAiData(userQuery).then((data => {
+            setAiMessage(data?.response?.content)
+        }))
+    }
 
   return (
       <div className="App">
-        <h1>This is the message: {message}</h1>
-        <h1>This is the Ai message: {aiMessage}</h1>
+        <input onChange={(e) => setUserQuery(e.target.value)} value={userQuery}/>
+          <button onClick={() => fetchDataFromMessage()}>Post</button>
+        <h1>This is the Ai message:</h1>
+          <div>{aiMessage}</div>
       </div>
   );
 }
