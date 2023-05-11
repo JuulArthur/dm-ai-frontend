@@ -68,3 +68,10 @@
   text-align: left;
   white-space: pre-wrap;
 }
+
+.User-input {
+  display: block;
+  width: 100%;
+  height: 12rem;
+  overflow: scroll;
+}
